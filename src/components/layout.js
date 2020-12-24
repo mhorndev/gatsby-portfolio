@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Context } from "./context"
 import { ThemeProvider } from "styled-components"
 import { GlobalStyle, lightTheme, darkTheme } from "./theme"
+import { Link } from "gatsby"
 
 const Layout = ({children}) => {
 
@@ -16,8 +17,15 @@ const Layout = ({children}) => {
   }
 
   useEffect(() => {
+    console.log(globalContext.darkMode)
     localStorage.setItem("darkMode", globalContext.darkMode)
   }, [globalContext.darkMode])
+
+  useEffect(() => {
+    console.log(document.body.style.color)
+  })
+
+  
 
   return (
     <Context.Provider value={{globalContext,setGlobalContext}}>
@@ -26,7 +34,6 @@ const Layout = ({children}) => {
         <button onClick={toggleDarkMode}>
           Toggle
         </button>
-
         {children}
       </ThemeProvider>
     </Context.Provider>

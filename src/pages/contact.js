@@ -1,37 +1,85 @@
 import React, { useEffect, useRef, useState } from "react"
 
-import "fontsource-montserrat"
 import { motion } from "framer-motion"
 import { FaUser } from 'react-icons/fa';
 import { FaAt } from 'react-icons/fa';
 import { FaEdit } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';
+import styled from "styled-components";
 
-export default function Home() {
+const Page = styled.div`
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+`
+
+const Container = styled.div`
+  margin: 0 auto;
+  padding: 20px; 
+  max-width: 1000px;
+  @media (min-width: 768px) { display: flex; }
+`
+
+const Flex = styled.div`
+  flex: ${props => props.flex};
+`
+
+const Header = styled.h1`
+  margin-top: 0;
+`
+
+const Accent = styled.span`
+  color: ${props => props.theme.accent};
+`
+
+const Paragraph = styled.p`
+  margin-top: 0;
+`
+
+const SubmitButton = styled.button`
+  border: none;
+  outline: none;
+  width: 100%;
+  margin-top: 2em;
+  padding: 10px;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+  color: ${props => 
+  props.theme.buttonTextColor};
+  background-color: ${props => 
+  props.theme.buttonColor};
+`
+
+const Contact = ({}) => {
 
   return (
-      <div id="page">
-        <div className="container">
-          <div className="header">
-            <h1 className="heading">Let's <span className="secondary">Talk</span>
-              <span className="oswald">.</span>
-            </h1>
-          </div>
-          <div className="content">
-            <p>I am always up for additional oppurtunities.</p>
-            <p>If you are interested in hiring me for a project or 
-              want or just want to say hi, fill out the form or email
-              me directly at <strong>blah@blah.com</strong></p>
+    <Page>
+      <Container>
+        <Flex flex={2}>
+          <Header>
+            Let's <Accent>Talk</Accent>.
+          </Header>
+        </Flex>
+        <Flex flex={4}>
+          <Paragraph>
+            I am always up for additional oppurtunities.
+          </Paragraph>
+          <Paragraph>
+            If you are interested in hiring me for a project or 
+            want or just want to say hi, fill out the form or email
+            me directly at <strong>mhorn.dev@gmail.com</strong>
+          </Paragraph>
 
-              <TextInput label="Name"/>
-              <TextInput label="Email"/>
-              <TextArea  label="Message"/>
-              <button><strong>Submit Message</strong></button>
+          <TextInput label="Name"/>
+          <TextInput label="Email"/>
+          <TextArea  label="Message"/>
 
-          </div> 
-          </div>
-        </div>
+          <SubmitButton>Submit Message</SubmitButton>
+
+        </Flex> 
+      </Container>
+    </Page>
   ) 
 }
 
@@ -102,3 +150,5 @@ const TextArea = ({label}) => {
     </>
   )
 }
+
+export default Contact

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import "fontsource-montserrat"
+import "../style.css"
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -15,12 +15,18 @@ const GlobalStyle = createGlobalStyle`
 `
 const lightTheme = {
   color: "#000000",
-  backgroundColor: "#FFFFFF"
+  accent: "#9400D3",
+  backgroundColor: "#FFFFFF",
+  buttonColor: "#9400D3",
+  buttonTextColor: "#FFFFFF"
 }
 
 const darkTheme = {
   color: "#FFFFFF",
-  backgroundColor: "#202020"
+  accent: "#9400D3",
+  backgroundColor: "#202020",
+  buttonColor: "#9400D3",
+  buttonTextColor: "#FFFFFF"
 }
 
 export { lightTheme, darkTheme, GlobalStyle } 
