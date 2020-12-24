@@ -2,14 +2,14 @@ import React, {useContext } from "react"
 import styled from "styled-components"
 import { Context } from "../components/context"
 
-const Index = ({}) => {
+const About = ({}) => {
   const {globalContext,setGlobalContext} = useContext(Context)
 
   return (
     <div>
-      Index
+      About
     </div>
   )
 }
 
-export default Index
+export default About

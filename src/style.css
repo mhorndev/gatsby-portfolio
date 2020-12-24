@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+
+.primary {
+  color:#000000;
+}
+
+.secondary {
+  color: #9400d3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  color: #000000;
+  background-color: #FFFFFF;
+  font-size: 18px;
+  font-family: Montserrat; 
+}
+
+.dark {
+  color: #FFFFFF;
+  background-color: #202020;
+}
+
+.oswald {
+  font-family: Oswald; 
+}
+
+#page {
+  position: fixed;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  overflow-y: scroll;
+  
+}
+
+#page .container {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1000px;
+  background-color: #202020;
+}
+
+@media (min-width: 768px) {
+  #page .container {
+    display: flex;
+  }
+}
+
+.header {
+  flex: 2;
+}
+
+.content {
+  flex: 4;
+}
+
+.heading {
+  margin-top: 0;
+}
+
+input, [contenteditable="true"] {
+  width: 100%;
+  padding: 10px;
+  font-size: inherit;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  background-color: whitesmoke;
+  resize: vertical;
+}
+
+.line {
+  height: 3px;
+  width: 0%;
+  background-color: #9400d3;
+}
+
+button {
+  border: none;
+  width: 100%;
+  padding: 10px;
+  font-family: inherit;
+  color: #FFF;
+  font-size: 1em;
+  background-color: #9400d3;
+  margin-top: 2em;
+}
