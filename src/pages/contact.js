@@ -1,16 +1,15 @@
-import React, { useEffect, useRef, useState } from "react"
-
+import React, { useState, createContext, useContext, useEffect } from "react"
 import { motion } from "framer-motion"
-import { FaUser } from 'react-icons/fa';
-import { FaAt } from 'react-icons/fa';
-import { FaEdit } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';
 import styled from "styled-components";
+import { doc } from "prettier";
+const FormContext = createContext(null)
 
 const Page = styled.div`
   top: 0; bottom: 0;
   left: 0; right: 0;
+  overflow-x: none;
 `
 
 const Container = styled.div`
@@ -36,11 +35,50 @@ const Paragraph = styled.p`
   margin-top: 0;
 `
 
+const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  font-size: inherit;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  transition: all 250ms ease;
+  color: ${props => props.theme.inputTextColor};
+  background-color: ${props => props.theme.inputColor};
+`
+
+const InputLabel = styled.h4`
+  margin-bottom: 0;
+`
+
+const Message = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  font-size: inherit; 
+  font-family: inherit;
+  overflow: hidden;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  resize: none;
+  transition: all 250ms ease; 
+  color: ${props => props.theme.inputTextColor};
+  background-color: ${props => props.theme.inputColor};
+`
+
+const Underline = styled(motion.div)`
+  height: 3px;
+  width: 0%;
+  background-color: ${props => props.theme.accent};
+`
+
 const SubmitButton = styled.button`
   border: none;
   outline: none;
   width: 100%;
-  margin-top: 2em;
+  margin-top: 2.5em;
   padding: 10px;
   font-size: 1em;
   font-weight: 600;
@@ -49,9 +87,24 @@ const SubmitButton = styled.button`
   props.theme.buttonTextColor};
   background-color: ${props => 
   props.theme.buttonColor};
+  cursor: pointer;
 `
 
-const Contact = ({}) => {
+const ContactPage = ({}) => {
+  const [formContext,setFormContext] = useState({
+    name: {
+      value: "",
+      valid: undefined
+    },
+    email: {
+      value: "",
+      valid: undefined
+    },
+    message: {
+      value: "",
+      valid: undefined
+    }
+  })
 
   return (
     <Page>
@@ -68,87 +121,144 @@ const Contact = ({}) => {
           <Paragraph>
             If you are interested in hiring me for a project or 
             want or just want to say hi, fill out the form or email
-            me directly at <strong>mhorn.dev@gmail.com</strong>
+            me directly at {" "}
+            <strong>mhorn.dev@gmail.com</strong>
           </Paragraph>
-
-          <TextInput label="Name"/>
-          <TextInput label="Email"/>
-          <TextArea  label="Message"/>
-
+          <FormContext.Provider value={{formContext,setFormContext}}>
+            <NameInput/>
+            <EmailInput/>
+            <MessageInput/>
+          </FormContext.Provider>
           <SubmitButton>Submit Message</SubmitButton>
-
         </Flex> 
       </Container>
     </Page>
   ) 
 }
 
-const TextInput = ({label}) => {
+const NameInput = () => {
   const [active,setActive] = useState(false)
-  const [value,setValue] = useState("")
+  const {formContext,setFormContext} = useContext(FormContext)
 
   function onChange(e) {
-    setValue(e.target.value)
+    let value = e.target.value
+    setFormContext(prev => ({ ...prev, 
+      name: { 
+        value: value, 
+        valid: value.length > 0 
+      } 
+    }))
   }
 
   return (
     < >
-      <h4 style={{marginBottom: 0}}>
-        {label}
-        <span className="oswald"></span>
-      </h4>
-
-      <input
+      <InputLabel>
+        Name
+      </InputLabel>
+      <Input
         type="text" 
         spellCheck={false}
         onFocus={()=>setActive(true)}
         onBlur={()=>setActive(false)}
         onChange={e=>onChange(e)}
       />
-
-      <motion.div 
+      <Underline
         className="line"
         initial={{width: "0%"}}
         animate={{width: active ? "100%" : 0}}
         transition={{duration: .25}}
-      ></motion.div>
-      
+      />
     </>
   )
 }
 
-const TextArea = ({label}) => {
+const EmailInput = () => {
   const [active,setActive] = useState(false)
-  const [value,setValue] = useState("")
+  const {formContext,setFormContext} = useContext(FormContext)
 
   function onChange(e) {
-    setValue(e.target.value)
+    let value = e.target.value
+    setFormContext(prev => ({ ...prev, 
+      email: { 
+        value: value, 
+        valid: value.length > 0 
+      } 
+    }))
   }
 
   return (
     < >
-      <h4 style={{marginBottom: 0}}>
-        {label}
-        <span className="oswald"></span>
-      </h4>
-
-      <div 
-        contentEditable
+      <InputLabel>
+        Email
+      </InputLabel>
+      <Input
+        type="text" 
         spellCheck={false}
         onFocus={()=>setActive(true)}
         onBlur={()=>setActive(false)}
         onChange={e=>onChange(e)}
       />
-
-      <motion.div 
+      <Underline
         className="line"
         initial={{width: "0%"}}
         animate={{width: active ? "100%" : 0}}
         transition={{duration: .25}}
-      ></motion.div>
-      
+      />
     </>
   )
 }
 
-export default Contact
+const MessageInput = () => {
+  const [active,setActive] = useState(false)
+  const {formContext,setFormContext} = useContext(FormContext)
+  const [multiplier, setMultiplier] = useState(undefined)
+  const [rows, setRows] = useState(1)
+
+  function onChange(e) {
+    var text = e.target.value  
+    var lines = text.split(/\r|\r\n|\n/);
+    var count = lines.length;
+    console.log(count); // Outputs 4
+    setRows(count)
+
+    
+    let value = e.target.value
+    setFormContext(prev => ({ ...prev, 
+      message: { 
+        value: value, 
+        valid: value.length > 0 
+      } 
+    }))
+  }
+
+  useEffect(()=> {
+    const element = document.getElementById("message-input")
+    const height = document.getElementById("message-input").offsetHeight-20
+    console.log(height)
+    setMultiplier(height)
+  },[])
+
+  return (
+    < >
+      <InputLabel>
+        Message
+      </InputLabel>
+      <Message
+        id="message-input"
+        rows={rows}
+        spellCheck={false}
+        onFocus={()=>setActive(true)}
+        onBlur={()=>setActive(false)}
+        onInput={e=>onChange(e)}  
+      />
+      <Underline
+        className="line"
+        initial={{width: "0%"}}
+        animate={{width: active ? "100%" : 0}}
+        transition={{duration: .25}}
+      />
+    </>
+  )
+}
+
+export default ContactPage

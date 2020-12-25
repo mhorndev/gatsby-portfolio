@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-input, [contenteditable="true"] {
+[contenteditable="true"] {
   width: 100%;
   padding: 10px;
   font-size: inherit;

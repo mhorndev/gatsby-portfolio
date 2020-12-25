@@ -18,7 +18,9 @@ const lightTheme = {
   accent: "#9400D3",
   backgroundColor: "#FFFFFF",
   buttonColor: "#9400D3",
-  buttonTextColor: "#FFFFFF"
+  buttonTextColor: "#FFFFFF",
+  inputColor: "#F5F5F5",
+  inputTextColor: "#000000",
 }
 
 const darkTheme = {
@@ -26,7 +28,9 @@ const darkTheme = {
   accent: "#9400D3",
   backgroundColor: "#202020",
   buttonColor: "#9400D3",
-  buttonTextColor: "#FFFFFF"
+  buttonTextColor: "#FFFFFF",
+  inputColor: "#333333",
+  inputTextColor: "#FFFFFF",
 }
 
 export { lightTheme, darkTheme, GlobalStyle } 
