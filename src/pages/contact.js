@@ -1,10 +1,25 @@
 import React, { useState, createContext, useContext, useEffect } from "react"
 import { motion } from "framer-motion"
-import { FaLinkedin } from 'react-icons/fa';
+import {  FaLinkedin } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';
 import styled from "styled-components";
 import { doc } from "prettier";
 const FormContext = createContext(null)
+
+const Profiles = [
+  { 
+    text: "LinkedIn",
+    icon: <FaLinkedin size="1.25em"/>,
+    href: "https://www.linkedin.com/in/mark-horn-61b898172/",
+    backgroundColor: "#0072B1",
+  },
+  {
+    text: "Github",
+    icon: <FaGithub size="1.25em"/>,
+    href: "https://github.com/mhorndev",
+    backgroundColor: "#333333",
+  }
+]
 
 const Page = styled.div`
   top: 0; bottom: 0;
@@ -90,6 +105,38 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `
 
+const ProfileHeader = styled.h2`
+  margin-top: 1.5em;  
+`
+
+const ProfileButtons = styled.div`
+  width: 100%;
+  display: flex;
+`
+
+const ProfileButton = styled(motion.a)`
+  display: flex;
+  padding: 10px;
+  margin-right: 10px;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  background-color: ${props => props.backgroundColor};
+`
+
+const ProfileButtonText = styled(motion.span)`
+  display: flex;
+  margin-left: 10px;
+  align-items: center;
+`
+
+const ProfileButtonIcon = styled(motion.span)`
+  display: flex;
+  align-items: center;  
+`
+
 const ContactPage = ({}) => {
   const [formContext,setFormContext] = useState({
     name: {
@@ -105,6 +152,10 @@ const ContactPage = ({}) => {
       valid: undefined
     }
   })
+
+  function onSubmit() {
+    console.log("SUBMIT")
+  }
 
   return (
     <Page>
@@ -124,12 +175,40 @@ const ContactPage = ({}) => {
             me directly at {" "}
             <strong>mhorn.dev@gmail.com</strong>
           </Paragraph>
+
           <FormContext.Provider value={{formContext,setFormContext}}>
             <NameInput/>
             <EmailInput/>
             <MessageInput/>
           </FormContext.Provider>
-          <SubmitButton>Submit Message</SubmitButton>
+
+          <SubmitButton onClick={() => onSubmit()}>
+            Submit Message
+          </SubmitButton>
+
+          <ProfileHeader>
+            Social Profiles
+          </ProfileHeader>
+          <Paragraph>
+            You can also reach out to me on public social spaces.
+          </Paragraph>
+          
+          <ProfileButtons>
+            {Profiles.map((profile,index) => {
+              return (
+                <ProfileLink 
+                  key={profile+index}
+                  text={profile.text}
+                  icon={profile.icon}
+                  href={profile.href}
+                  backgroundColor={profile.backgroundColor}
+                />
+              )
+            })}
+          </ProfileButtons>
+
+
+
         </Flex> 
       </Container>
     </Page>
@@ -211,18 +290,12 @@ const EmailInput = () => {
 const MessageInput = () => {
   const [active,setActive] = useState(false)
   const {formContext,setFormContext} = useContext(FormContext)
-  const [multiplier, setMultiplier] = useState(undefined)
   const [rows, setRows] = useState(1)
 
   function onChange(e) {
-    var text = e.target.value  
-    var lines = text.split(/\r|\r\n|\n/);
-    var count = lines.length;
-    console.log(count); // Outputs 4
-    setRows(count)
-
-    
     let value = e.target.value
+    var lines = value.split(/\r|\r\n|\n/)
+    setRows(lines.length)
     setFormContext(prev => ({ ...prev, 
       message: { 
         value: value, 
@@ -230,13 +303,6 @@ const MessageInput = () => {
       } 
     }))
   }
-
-  useEffect(()=> {
-    const element = document.getElementById("message-input")
-    const height = document.getElementById("message-input").offsetHeight-20
-    console.log(height)
-    setMultiplier(height)
-  },[])
 
   return (
     < >
@@ -258,6 +324,32 @@ const MessageInput = () => {
         transition={{duration: .25}}
       />
     </>
+  )
+}
+
+const ProfileLink = ({text,icon,href,backgroundColor}) => {
+  const [hover,setHover] = useState(false)
+
+  return (
+    <ProfileButton
+      href={href}
+      target="_blank"
+      onMouseOver={()=>setHover(true)}
+      onMouseOut={()=>setHover(false)}
+      backgroundColor={backgroundColor}
+      initial={{opacity: 1}}
+      animate={{opacity: hover ? .75 : 1}}
+      transition={{ease: "easeInOut", duration: .25}}
+    >
+      <ProfileButtonIcon>
+        {icon}
+      </ProfileButtonIcon>
+
+      <ProfileButtonText>
+        {text}
+      </ProfileButtonText>
+
+    </ProfileButton>
   )
 }
 
