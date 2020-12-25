@@ -207,8 +207,6 @@ const ContactPage = ({}) => {
             })}
           </ProfileButtons>
 
-
-
         </Flex> 
       </Container>
     </Page>
@@ -337,18 +335,9 @@ const ProfileLink = ({text,icon,href,backgroundColor}) => {
       onMouseOver={()=>setHover(true)}
       onMouseOut={()=>setHover(false)}
       backgroundColor={backgroundColor}
-      initial={{opacity: 1}}
-      animate={{opacity: hover ? .75 : 1}}
-      transition={{ease: "easeInOut", duration: .25}}
     >
-      <ProfileButtonIcon>
-        {icon}
-      </ProfileButtonIcon>
-
-      <ProfileButtonText>
-        {text}
-      </ProfileButtonText>
-
+      <ProfileButtonIcon>{icon}</ProfileButtonIcon>
+      <ProfileButtonText>{text}</ProfileButtonText>
     </ProfileButton>
   )
 }
