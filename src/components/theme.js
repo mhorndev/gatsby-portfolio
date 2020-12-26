@@ -4,7 +4,8 @@ import "../style.css"
 const GlobalStyle = createGlobalStyle`
   html, body {
     font-size: 16px;
-    font-family: Montserrat; 
+    font-family: Montserrat;
+    margin: 0; padding: 0; 
     transition: all 250ms ease;
     color: ${props => (props.darkMode ? "#FFFFFF" : "#000000")};
     background-color: ${props => (props.darkMode  ? "#202020" : "#FFFFFF")};
