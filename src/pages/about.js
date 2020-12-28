@@ -46,26 +46,17 @@ const Label = styled.h3`
   color: #999999;
 `
 
-const Company = styled.h3`
+const Heading = styled.h3`
   margin-bottom: 0;
 `
 
-const Position = styled.div`
+const SubHeading = styled.div`
   margin-top: 0;
   margin-bottom: 0;
 `
 
 const Timeframe = styled.div`
   margin-top: 0;
-`
-
-const School = styled.h3`
-  margin-bottom: 0;
-`
-
-const Degree = styled.div`
-  margin-top: 0;
-  margin-bottom: 0;
 `
 
 const List = styled.ul`
@@ -96,9 +87,23 @@ const AboutPage = ({}) => {
             <Label>Experience<Accent>.</Accent></Label>
           </Description>
           <Content flex={4}>
-            <Company>Streamline</Company>
-            <Position>Full Stack Developer</Position>
+            <Heading>Streamline</Heading>
+            <SubHeading>Full Stack Developer</SubHeading>
             <Timeframe>2016 - Present</Timeframe>
+            <List>
+              <Item>
+                Developed front and back end applications
+              </Item>
+            </List>
+            <Heading>DirecTV</Heading>
+            <SubHeading>Software Engineer</SubHeading>
+            <Timeframe>2013 - 2015</Timeframe>
+            <List>
+              <Item>abc</Item>
+            </List>
+            <Heading>DirecTV</Heading>
+            <SubHeading>Quality Assurance</SubHeading>
+            <Timeframe>2012</Timeframe>
             <List>
               <Item>abc</Item>
             </List>
@@ -109,8 +114,8 @@ const AboutPage = ({}) => {
             <Label>Education<Accent>.</Accent></Label>
           </Description>
           <Content flex={4}>
-            <School>Western Governor's University</School>
-            <Degree>BSCS - Bachelor of Science, Computer Science</Degree>
+            <Heading>Western Governor's University</Heading>
+            <SubHeading>BSCS - Bachelor of Science, Computer Science</SubHeading>
             <Timeframe>2018 - 2020</Timeframe>
             <List>
               <Item>abc</Item>
@@ -122,8 +127,20 @@ const AboutPage = ({}) => {
             <Label>Certifications<Accent>.</Accent></Label>
           </Description>
           <Content flex={4}>
-          <Company>Project+</Company>
-            <Position>Full Stack Developer</Position>
+            <Heading>Project+</Heading>
+            <SubHeading>Full Stack Developer</SubHeading>
+            <Timeframe>2018</Timeframe>
+            <List>
+              <Item>abc</Item>
+            </List>
+            <Heading>ITIL 4</Heading>
+            <SubHeading>Full Stack Developer</SubHeading>
+            <Timeframe>2018</Timeframe>
+            <List>
+              <Item>abc</Item>
+            </List>
+            <Heading>CIW Site Developer</Heading>
+            <SubHeading>Full Stack Developer</SubHeading>
             <Timeframe>2018</Timeframe>
             <List>
               <Item>abc</Item>

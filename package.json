@@ -19,6 +19,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-icons": "^4.1.0",
+    "react-use-gesture": "^9.0.0-beta.11",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
