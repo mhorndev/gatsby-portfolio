@@ -10,7 +10,7 @@ const Page = styled.div`
   overflow: hidden;
 `
 
-const Slider = styled(motion.div)`
+const SlideContainer = styled(motion.div)`
   position: fixed;
   top: 0; bottom: 0;
   left: 0; right: 0;
@@ -54,7 +54,7 @@ const Slides = [
   <Contact/>
 ]
 
-const Index = () => {
+const Slider = () => {
   const [throttle,setThrottle] = useState(Date.now())
   const [[slide, direction], setSlide] = useState([0, 0])
 
@@ -113,7 +113,7 @@ const Index = () => {
         initial={false} 
         custom={direction}
       >
-        <Slider 
+        <SlideContainer 
           {...bind()}
           key={slide} 
           custom={direction} 
@@ -127,10 +127,10 @@ const Index = () => {
           }}
         >
           {Slides[slide]}
-        </Slider>
+        </SlideContainer>
       </AnimatePresence>
     </Page>
   )
 }
 
-export default Index
+export default Slider
