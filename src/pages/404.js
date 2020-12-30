@@ -13,20 +13,22 @@ const Content = styled.div`
   padding: 20px; 
   max-width: 1000px;
   display: flex;
+  flex-direction: column;
 `
 
 const Heading = styled.h1`
   margin-top: 1em;
 `
 
-const Home = ({}) => {
+const NotFound = ({}) => {
   return (
     <Page>
       <Content>
-        <Heading>Home</Heading>
+        <Heading>Fuggedabodit.</Heading>
+        <p>There doesn't seem to be anything here</p>
       </Content>
     </Page>
   )
 }
 
-export default Home
+export default NotFound

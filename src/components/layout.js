@@ -1,9 +1,40 @@
 import React, { useEffect, useState } from "react"
+import "../style.css"
 import { Context } from "./context"
 import { ThemeProvider } from "styled-components"
 import { GlobalStyle, lightTheme, darkTheme } from "./theme"
-import { Link } from "gatsby"
+import routes from "./routes"
+import { navigate } from "gatsby"
+import Navbar from "./navbar"
+import Transition from "./transition"
 
+const Layout = ({children, location}) => {
+  const [globalContext,setGlobalContext] = useState({})
+
+  /**
+   * This effect determines direction of the transition before render
+   * @todo Polyfill for findIndex
+   */
+  useEffect(() => {
+    let next = routes.findIndex(obj => obj.path === globalContext.path)
+    let curr = routes.findIndex(obj => obj.path === location.pathname)
+    setGlobalContext(prev => ({...prev, direction: next > curr ? 1 : -1}))
+    navigate(globalContext.path)
+  }, [globalContext.path])
+
+  return (
+    <Context.Provider value={{globalContext,setGlobalContext}}>
+      <Navbar/>
+      <Transition>
+        {children}
+      </Transition>
+    </Context.Provider>
+  )
+}
+
+export default Layout
+
+/*
 const Layout = ({children}) => {
 
   const [globalContext,setGlobalContext] = useState({
@@ -39,5 +70,4 @@ const Layout = ({children}) => {
     </Context.Provider>
   )
 }
-
-export default Layout
+*/
