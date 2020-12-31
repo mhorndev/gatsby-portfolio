@@ -40,7 +40,7 @@ const Transition = ({children}) => {
     },
     after: (direction) => {
       return {
-        backgroundColor: "whitesmoke",
+        backgroundColor: "#000",
         transformOrigin: direction < 0 
         ? "left"
         : "right",

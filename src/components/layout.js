@@ -12,8 +12,9 @@ const Layout = ({children, location}) => {
   const [globalContext,setGlobalContext] = useState({})
 
   /**
-   * This effect determines direction of the transition before render
    * @todo Polyfill for findIndex
+   * This effect determines direction of the transition before render
+   * 
    */
   useEffect(() => {
     let next = routes.findIndex(obj => obj.path === globalContext.path)
