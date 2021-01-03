@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 import "../style.css"
 import { Context } from "./context"
-import { ThemeProvider } from "styled-components"
-import { GlobalStyle, lightTheme, darkTheme } from "./theme"
 import routes from "./routes"
 import { navigate } from "gatsby"
 import Navbar from "./navbar"
 import Transition from "./transition"
+//import { ThemeProvider } from "styled-components"
+//import { GlobalStyle, lightTheme, darkTheme } from "./theme"
 
 const Layout = ({children, location}) => {
   const [globalContext,setGlobalContext] = useState({})
